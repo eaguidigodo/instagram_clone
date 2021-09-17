@@ -1,0 +1,64 @@
+<h1> Editing your post </h1>
+<% if @post.errors.any? %>
+<div id="error_explanation">
+  <h2><%= @post.errors.count %>There are errors.</h2>
+  <ul>
+  <% @post.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="card">
+<%= form_with(model: @post, local: true) do |f|%>
+  <div class="mb-3">
+      <%= f.text_field :content, placeholder: "What are news???"%></div>
+  <div class="mb-3">
+
+  <div class="image">
+      <%= image_tag(@post.image.url) if @post.image && @post.image.url %>
+      <%= f.file_field :image, placeholder: "Upload an image here" %>
+      <%= f.hidden_field :image_cache %>
+  </div>
+
+  <div>
+      <%=f.submit "Create a post" %>
+  </div>
+<% end %>
+</div>
+
+
+<div>
+<% @posts.each do |post| %>
+  <div class="card" style="width: 18rem;">
+      <%= image_tag post.image.url %>
+      <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text"><%=post.content%>.</p>
+      </div>
+      
+      <div class="card-body">
+          <div class="post__option">
+               <%=link_to edit_post_path(post.id), data:{ confirm: 'Edit this post?'} do %>
+                <span class="material-icons"> favorite_border </span>
+              <% end %>
+          </div>
+
+          <div class="post__option">
+              <%=link_to edit_post_path(post.id), data:{ confirm: 'Edit this post?'} do %>
+                <span class="material-icons"> edit </span>
+              <% end %>
+          </div>
+
+          <div class="post__option">
+                <%=link_to post_path(post.id), method: :delete, data:{ confirm: 'Delete this post?'} do %>
+              <span class="material-icons"> delete </span>
+              <% end %>
+          </div>
+
+      </div>
+  </div>
+<% end %>
+</div>
+

@@ -1,0 +1,8 @@
+<h3>Confirm your post please!</h3>
+<%= form_with(model: @post, local: true, url: posts_path) do |form| %>
+  <%= form.hidden_field :content %>
+  <p>Text:<%= @post.content %></p>
+  <%= image_tag(@post.image.url) if @post.image && @post.image.url %>
+  <%= form.hidden_field :image_cache %>
+  <%= form.submit  "Create the post" %>
+<% end %>
