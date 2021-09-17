@@ -1,2 +1,65 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<%= form_with(model: @post, local: true) do |form| %>
+    <% if @blog.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= @post.errors.count %>There are errors.</h2>
+        <ul>
+        <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+<div class="card">
+    <%= form_with(model: @post, local: true) do |f|%>
+        <div class="mb-3">
+            <%= f.text_field :content, placeholder: "What are news???"%></div>
+        <div class="mb-3">
+
+        <div class="image">
+
+        </div>
+
+        <div>
+            <%=f.submit "Create a post" %>
+        </div>
+    <%end%>
+</div>
+
+
+<div>
+    <% @posts.each do |post| %>
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text"><%=post.content%>.</p>
+            </div>
+            
+            <div class="card-body">
+                <div class="post__option">
+                    <span class="material-icons"> favorite_border </span>
+                     <%=link_to edit_post_path(post.id), data:{ confirm: 'Edit this post?'} do %>
+                    <p>Edit</p>
+                    <% end %>
+                </div>
+
+                <div class="post__option">
+                    <span class="material-icons"> edit </span>
+                    <%=link_to edit_post_path(post.id), data:{ confirm: 'Edit this post?'} do %>
+                    <p></p>
+                    <% end %>
+                </div>
+
+                <div class="post__option">
+                    <span class="material-icons"> delete </span>
+                    <%=link_to post_path(post.id), method: :delete, data:{ confirm: 'Delete this post?'} do %>
+                    <p>Edit</p>
+                    <% end %>
+                </div>
+
+            </div>
+        </div>
+    <% end %>
+</div>
+
