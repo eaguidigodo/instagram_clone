@@ -1,2 +1,8 @@
 <h2>Your name is: <%=@user.name%></h2>
-<h2> and your email is : <%=@user.email></h2>
+<h2> and your email is : <%=@user.email%></h2>
+
+<div class="post__option">
+<%=link_to edit_user_path(current_user.id), data:{ confirm: 'Edit your profile?'} do %>
+    <p> Edit your profile </p>
+<% end %>
+</div>

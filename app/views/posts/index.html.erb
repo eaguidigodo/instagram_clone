@@ -39,8 +39,14 @@
             
             <div class="card-body">
                 <div class="post__option">
-                     <%=link_to edit_post_path(post.id), data:{ confirm: 'Edit this post?'} do %>
-                        <span class="material-icons"> favorite_border </span>
+                     <%=link_to favorite_path(post.id) do %>
+                        <span class="material-icons"> thumb_up </span>
+                    <% end %>
+                </div>
+
+                <div class="post__option">
+                     <%=link_to favorite_path(post.id), method: :delete, data:{ confirm: 'Remove from favorite???'} do %>
+                     <span class="material-icons"> thumb_down </span>
                     <% end %>
                 </div>
 
@@ -55,9 +61,14 @@
                         <span class="material-icons"> delete </span>
                     <% end %>
                 </div>
-
             </div>
         </div>
+    <% end %>
+</div>
+
+<div>
+    <%=link_to favorite_path do %>
+        <h3> View my favorites posts </h3>
     <% end %>
 </div>
 

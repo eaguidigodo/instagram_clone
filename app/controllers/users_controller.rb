@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :login_required, only: [:new, :create]
+    skip_before_action :login_required, only: [:new, :create, :edit, :update]
     def new
         @user = User.new
     end
@@ -15,6 +15,17 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find(params[:id])
+    end
+
+    def edit
+    end
+
+    def update
+        if @user.update(set_param)
+            redirect_to user_path(current_user.id), notice: "Profile updated!"
+        else
+            render :new
+        end
     end
 
     private
