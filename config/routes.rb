@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :contacts
   get 'posts/index'
   get 'sessions/new'
   resources :posts do

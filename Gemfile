@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.0'
+#ruby '2.7.0'
 
 gem 'rails', '~> 5.2.5'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -16,6 +16,7 @@ gem 'bcrypt'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'faker'
+gem 'rexml'
 
 group :development, :test do
   gem 'dotenv-rails'
