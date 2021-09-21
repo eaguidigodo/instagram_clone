@@ -33,23 +33,28 @@
         <div class="card" style="width: 18rem;">
             <%= image_tag post.image.url %>
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">@<%=@users_name_and_mail[ post.user_id][0] %>  </h5>
                 <p class="card-text"><%=post.content%>.</p>
             </div>
             
             <div class="card-body">
+
+            <% unless post.user_id == current_user.id %>
+                <% if @favorite.present? %>
                 <div class="post__option">
-                     <%=link_to favorite_path(post.id) do %>
+                    <%=link_to favorite_path(id: @favorite.id), method: :delete, data:{ confirm: 'Remove from favorite???'} do %>
+                        <span class="material-icons"> thumb_down </span>
+                    <% end %>
+                </div>
+                <% else %>
+                <div class="post__option">
+                     <%=link_to favorites_path(post_id: post.id), method: :post do %>
                         <span class="material-icons"> thumb_up </span>
                     <% end %>
                 </div>
-
-                <div class="post__option">
-                     <%=link_to favorite_path(post.id), method: :delete, data:{ confirm: 'Remove from favorite???'} do %>
-                     <span class="material-icons"> thumb_down </span>
-                    <% end %>
-                </div>
-
+                <% end %>
+            <% end %>
+            <% if current_user.email == @users_name_and_mail[ post.user_id][1] %> 
                 <div class="post__option">
                     <%=link_to edit_post_path(post.id), data:{ confirm: 'Edit this post?'} do %>
                         <span class="material-icons"> edit </span>
@@ -61,14 +66,16 @@
                         <span class="material-icons"> delete </span>
                     <% end %>
                 </div>
+
+            <% end %>
             </div>
         </div>
     <% end %>
-</div>
-
-<div>
-    <%=link_to favorite_path do %>
+    <div>
+    <%=link_to favorite_path(current_user.id) do %>
         <h3> View my favorites posts </h3>
     <% end %>
 </div>
+</div>
+
 

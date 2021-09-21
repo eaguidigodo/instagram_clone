@@ -1,7 +1,25 @@
-<% unless @post.user_id == current_user.id %>
-  <% if @favorite.present? %>
-    <%= link_to 'Remove favorite', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
-  <% else %>
-    <%= link_to 'Favorite', favorites_path(blog_id: @post.id), method: :post, class: 'btn btn-primary' %>
-  <% end %>
-<% end %>
+<div>
+    <% @all_favorites.each do |favorite| %>
+        <div class="card" style="width: 18rem;">
+            <%= image_tag favorite.post.image_url %>
+            <div class="card-body">
+                <p class="card-text"><%=favorite.post.content%>.</p>
+            </div>
+            
+            <div class="card-body">
+
+           
+                <div class="post__option">
+                    <%=link_to favorite_path(id: favorite.id), method: :delete, data:{ confirm: 'Remove from favorite???'} do %>
+                        <span class="material-icons"> thumb_down </span>
+                    <% end %>
+                </div>
+     
+            </div>
+        </div>
+    <% end %>
+    <div>
+    <%=link_to favorite_path(current_user.id) do %>
+        <h3> View my favorites posts </h3>
+    <% end %>
+</div>
